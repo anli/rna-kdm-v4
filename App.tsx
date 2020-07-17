@@ -4,7 +4,8 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {ShowdownScreen} from '@screens';
+import {PreviewScreen, ShowdownScreen} from '@screens';
+import {store} from '@store';
 import React from 'react';
 import 'react-native-gesture-handler';
 import {
@@ -12,6 +13,7 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Provider as StoreProvider} from 'react-redux';
 
 const theme = {
   ...NavigationDefaultTheme,
@@ -49,13 +51,28 @@ const Tabs = () => {
   );
 };
 
+const RootStack = createStackNavigator();
+
 const App = () => {
   return (
-    <PaperProvider>
-      <NavigationContainer theme={theme}>
-        <Tabs />
-      </NavigationContainer>
-    </PaperProvider>
+    <StoreProvider store={store}>
+      <PaperProvider>
+        <NavigationContainer theme={theme}>
+          <RootStack.Navigator mode="modal">
+            <RootStack.Screen
+              name="Main"
+              component={Tabs}
+              options={{headerShown: false}}
+            />
+            <RootStack.Screen
+              name="PreviewScreen"
+              component={PreviewScreen.Component}
+              options={PreviewScreen.Options}
+            />
+          </RootStack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </StoreProvider>
   );
 };
 export default App;

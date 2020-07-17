@@ -17,6 +17,10 @@ module.exports = {
           '.json',
         ],
         alias: {
+          '@showdown': './src/showdown',
+          '@store': './src/store',
+          '@terrain': './src/terrain',
+          '@utils': './src/utils',
           '@test': './test',
           '@screens': './src/screens',
         },
