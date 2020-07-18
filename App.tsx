@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {PreviewScreen, ShowdownScreen} from '@screens';
-import {store} from '@store';
+import {persisted, store} from '@store';
 import React from 'react';
 import 'react-native-gesture-handler';
 import {
@@ -14,6 +14,7 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Provider as StoreProvider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const theme = {
   ...NavigationDefaultTheme,
@@ -56,22 +57,24 @@ const RootStack = createStackNavigator();
 const App = () => {
   return (
     <StoreProvider store={store}>
-      <PaperProvider>
-        <NavigationContainer theme={theme}>
-          <RootStack.Navigator mode="modal">
-            <RootStack.Screen
-              name="Main"
-              component={Tabs}
-              options={{headerShown: false}}
-            />
-            <RootStack.Screen
-              name="PreviewScreen"
-              component={PreviewScreen.Component}
-              options={PreviewScreen.Options}
-            />
-          </RootStack.Navigator>
-        </NavigationContainer>
-      </PaperProvider>
+      <PersistGate loading={null} persistor={persisted.persistor}>
+        <PaperProvider>
+          <NavigationContainer theme={theme}>
+            <RootStack.Navigator mode="modal">
+              <RootStack.Screen
+                name="Main"
+                component={Tabs}
+                options={{headerShown: false}}
+              />
+              <RootStack.Screen
+                name="PreviewScreen"
+                component={PreviewScreen.Component}
+                options={PreviewScreen.Options}
+              />
+            </RootStack.Navigator>
+          </NavigationContainer>
+        </PaperProvider>
+      </PersistGate>
     </StoreProvider>
   );
 };

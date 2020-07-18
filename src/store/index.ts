@@ -1,1 +1,1 @@
-export {default as store, RootState} from './store';
+export {persisted, RootState, store} from './store';
