@@ -41,6 +41,8 @@
     "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
     // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     "paths": {
+      "@encounter": ["./src/encounter"],
+      "@navigation": ["./src/navigation"],
       "@showdown": ["./src/showdown"],
       "@store": ["./src/store"],
       "@terrain": ["./src/terrain"],

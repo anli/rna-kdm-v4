@@ -6,36 +6,42 @@ import useShowdown from './hooks';
 
 const Component = () => {
   const {
-    props: {terrains},
-    actions: {terrainPreview, terrainDraw},
+    props: {terrains, encounter},
+    actions: {terrainPreview, terrainDraw, encounterRemove},
   } = useShowdown();
 
   return (
     <View testID="ShowdownScreen">
-      <List.Section>
-        <List.Item
-          title="Terrains"
-          right={(itemProps) => (
-            <>
-              <IconButton
-                testID="InnovationDrawButton"
-                {...itemProps}
-                icon="star"
-                onPress={terrainDraw}
-              />
-            </>
-          )}
-        />
-        <Cards horizontal showsHorizontalScrollIndicator={false}>
-          {terrains?.map((terrain) => (
-            <Card
-              key={terrain.id}
-              data={terrain}
-              onPress={() => terrainPreview(terrain.id)}
+      <List.Item
+        title={encounter?.name}
+        right={(itemProps) => (
+          <>
+            <IconButton
+              {...itemProps}
+              icon="refresh"
+              onPress={encounterRemove}
             />
-          ))}
-        </Cards>
-      </List.Section>
+          </>
+        )}
+      />
+
+      <List.Item
+        title="Terrains"
+        right={(itemProps) => (
+          <>
+            <IconButton {...itemProps} icon="refresh" onPress={terrainDraw} />
+          </>
+        )}
+      />
+      <Cards horizontal showsHorizontalScrollIndicator={false}>
+        {terrains?.map((terrain) => (
+          <Card
+            key={terrain.id}
+            data={terrain}
+            onPress={() => terrainPreview(terrain.id)}
+          />
+        ))}
+      </Cards>
     </View>
   );
 };

@@ -10,6 +10,7 @@ const useShowdown = () => {
   const dispatch = useDispatch();
 
   const props = {
+    encounter: ShowdownSelectors.getEncounter(state),
     terrains: ShowdownSelectors.getTerrains(state),
   };
 
@@ -22,6 +23,7 @@ const useShowdown = () => {
           TerrainService.getTerrains(terrainConfigsMap.WhiteLion, terrainsMap),
         ),
       ),
+    encounterRemove: () => dispatch(showdownSlice.actions.encounterRemove()),
   };
 
   return {
