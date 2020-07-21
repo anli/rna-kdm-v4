@@ -12,18 +12,18 @@ const useShowdown = () => {
   const props = {
     encounter: ShowdownSelectors.getEncounter(state),
     terrains: ShowdownSelectors.getTerrains(state),
+    quarry: ShowdownSelectors.getQuarry(state),
   };
 
   const actions = {
-    terrainPreview: (id: string) =>
-      navigate('PreviewScreen', {imageUrl: terrainsMap[id].imageUrl}),
     terrainDraw: () =>
       dispatch(
         showdownSlice.actions.terrainSet(
           TerrainService.getTerrains(terrainConfigsMap.WhiteLion, terrainsMap),
         ),
       ),
-    encounterRemove: () => dispatch(showdownSlice.actions.encounterRemove()),
+    showdownClear: () => dispatch(showdownSlice.actions.showdownClear()),
+    preview: (imageUrl: string) => navigate('PreviewScreen', {imageUrl}),
   };
 
   return {

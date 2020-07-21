@@ -1,15 +1,18 @@
 import {Encounter} from '@encounter';
+import {Quarry} from '@quarry';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Terrain} from '@terrain';
 
 export interface ShowdownState {
   terrains: Terrain[];
   encounter?: Encounter;
+  quarry?: Quarry;
 }
 
 const INITIAL_STATE = {
   terrains: [],
   encounter: undefined,
+  quarry: undefined,
 };
 
 const getShowdownSlice = (initialState = INITIAL_STATE) =>
@@ -26,8 +29,11 @@ const getShowdownSlice = (initialState = INITIAL_STATE) =>
       ) => {
         state.encounter = action.payload;
       },
-      encounterRemove: () => {
+      showdownClear: () => {
         return INITIAL_STATE;
+      },
+      quarrySet: (state: ShowdownState, action: PayloadAction<Quarry>) => {
+        state.quarry = action.payload;
       },
     },
   });

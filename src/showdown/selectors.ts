@@ -1,4 +1,5 @@
 import {Encounter} from '@encounter';
+import {Quarry} from '@quarry';
 import {createSelector} from '@reduxjs/toolkit';
 import {Terrain} from '@terrain';
 import {ShowdownState} from './get-slice';
@@ -30,8 +31,15 @@ const encounterSelector = createSelector<
   Encounter | undefined
 >(showdownSelector, (showdown) => showdown.encounter);
 
+const quarrySelector = createSelector<
+  {showdown: ShowdownState},
+  ShowdownState,
+  Quarry | undefined
+>(showdownSelector, (showdown) => showdown.quarry);
+
 export default class {
   static getTerrains = terrainsSelector;
   static getHasEncounter = hasEncounterSelector;
   static getEncounter = encounterSelector;
+  static getQuarry = quarrySelector;
 }

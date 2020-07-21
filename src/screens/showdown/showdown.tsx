@@ -6,24 +6,39 @@ import useShowdown from './hooks';
 
 const Component = () => {
   const {
-    props: {terrains, encounter},
-    actions: {terrainPreview, terrainDraw, encounterRemove},
+    props: {terrains, encounter, quarry},
+    actions: {terrainDraw, showdownClear, preview},
   } = useShowdown();
 
   return (
     <View testID="ShowdownScreen">
-      <List.Item
-        title={encounter?.name}
-        right={(itemProps) => (
-          <>
-            <IconButton
-              {...itemProps}
-              icon="refresh"
-              onPress={encounterRemove}
-            />
-          </>
-        )}
-      />
+      {encounter && (
+        <List.Item
+          title={encounter.name}
+          right={(itemProps) => (
+            <>
+              <IconButton
+                {...itemProps}
+                icon="refresh"
+                onPress={showdownClear}
+              />
+            </>
+          )}
+        />
+      )}
+
+      {quarry && (
+        <Cards horizontal showsHorizontalScrollIndicator={false}>
+          <Card
+            data={{name: 'Monster'}}
+            onPress={() => preview(quarry.monsterCardImageUrl)}
+          />
+          <Card
+            data={{name: 'Basic Action'}}
+            onPress={() => preview(quarry.basicActionCardImageUrl)}
+          />
+        </Cards>
+      )}
 
       <List.Item
         title="Terrains"
@@ -38,7 +53,7 @@ const Component = () => {
           <Card
             key={terrain.id}
             data={terrain}
-            onPress={() => terrainPreview(terrain.id)}
+            onPress={() => preview(terrain.imageUrl)}
           />
         ))}
       </Cards>
