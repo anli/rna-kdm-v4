@@ -35,6 +35,16 @@ const getShowdownSlice = (initialState = INITIAL_STATE) =>
       quarrySet: (state: ShowdownState, action: PayloadAction<Quarry>) => {
         state.quarry = action.payload;
       },
+      statIncrease: (state: ShowdownState, action: PayloadAction<string>) => {
+        if (state.encounter?.statsMap) {
+          state.encounter.statsMap[action.payload]++;
+        }
+      },
+      statDecrease: (state: ShowdownState, action: PayloadAction<string>) => {
+        if (state.encounter?.statsMap) {
+          state.encounter.statsMap[action.payload]--;
+        }
+      },
     },
   });
 

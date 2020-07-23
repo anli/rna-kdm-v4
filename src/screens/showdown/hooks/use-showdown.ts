@@ -13,6 +13,7 @@ const useShowdown = () => {
     encounter: ShowdownSelectors.getEncounter(state),
     terrains: ShowdownSelectors.getTerrains(state),
     quarry: ShowdownSelectors.getQuarry(state),
+    stats: ShowdownSelectors.getStats(state),
   };
 
   const actions = {
@@ -24,6 +25,10 @@ const useShowdown = () => {
       ),
     showdownClear: () => dispatch(showdownSlice.actions.showdownClear()),
     preview: (imageUrl: string) => navigate('PreviewScreen', {imageUrl}),
+    statIncrease: (id: string) =>
+      dispatch(showdownSlice.actions.statIncrease(id)),
+    statDecrease: (id: string) =>
+      dispatch(showdownSlice.actions.statDecrease(id)),
   };
 
   return {

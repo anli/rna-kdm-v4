@@ -1,4 +1,4 @@
-import {Encounter} from '@encounter';
+import {Encounter, EncounterService} from '@encounter';
 import {Quarry} from '@quarry';
 import {createSelector} from '@reduxjs/toolkit';
 import {Terrain} from '@terrain';
@@ -37,9 +37,18 @@ const quarrySelector = createSelector<
   Quarry | undefined
 >(showdownSelector, (showdown) => showdown.quarry);
 
+const statsSelector = createSelector<
+  {showdown: ShowdownState},
+  Encounter | undefined,
+  {name: string; value: string}[]
+>(encounterSelector, (encounter) =>
+  encounter?.statsMap ? EncounterService.getStats(encounter.statsMap) : [],
+);
+
 export default class {
   static getTerrains = terrainsSelector;
   static getHasEncounter = hasEncounterSelector;
   static getEncounter = encounterSelector;
   static getQuarry = quarrySelector;
+  static getStats = statsSelector;
 }

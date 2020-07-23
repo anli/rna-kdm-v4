@@ -1,13 +1,13 @@
 import React from 'react';
 import {View} from 'react-native';
 import {IconButton, List} from 'react-native-paper';
-import {Card, Cards} from './components';
+import {Card, Cards, Stat, Stats} from './components';
 import useShowdown from './hooks';
 
 const Component = () => {
   const {
-    props: {terrains, encounter, quarry},
-    actions: {terrainDraw, showdownClear, preview},
+    props: {stats, terrains, encounter, quarry},
+    actions: {terrainDraw, showdownClear, preview, statIncrease, statDecrease},
   } = useShowdown();
 
   return (
@@ -26,6 +26,18 @@ const Component = () => {
           )}
         />
       )}
+
+      <Stats>
+        {stats.map(({name, value}: {name: string; value: string}) => (
+          <Stat
+            key={name}
+            name={name}
+            value={value}
+            onIncrease={statIncrease}
+            onDecrease={statDecrease}
+          />
+        ))}
+      </Stats>
 
       {quarry && (
         <Cards horizontal showsHorizontalScrollIndicator={false}>
