@@ -2,6 +2,7 @@ import {Encounter} from '@encounter';
 import {Quarry} from '@quarry';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Terrain} from '@terrain';
+import {shuffle} from '@utils';
 
 export interface ShowdownState {
   terrains: Terrain[];
@@ -78,6 +79,12 @@ const getShowdownSlice = (initialState = INITIAL_STATE) =>
           const [topCard, ...aiWounds] = state.aiWounds;
           state.aiWounds = aiWounds;
           state.aiDraws = [topCard, ...state.aiDraws];
+        }
+      },
+      aiShuffleDiscard: (state: ShowdownState) => {
+        if (state.aiDiscards.length > 0 && state.aiDraws.length === 0) {
+          state.aiDraws = shuffle(state.aiDiscards);
+          state.aiDiscards = [];
         }
       },
     },

@@ -25,6 +25,7 @@ const Component = () => {
       aiDraw,
       aiWound,
       aiUndoWound,
+      aiShuffleDiscard,
     },
   } = useShowdown();
 
@@ -99,6 +100,7 @@ const Component = () => {
         title={`AI Cards (${aiDraws.length})`}
         right={(itemProps) => (
           <>
+            <IconButton {...itemProps} icon="undo" onPress={aiShuffleDiscard} />
             <IconButton {...itemProps} icon="star" onPress={aiDraw} />
           </>
         )}

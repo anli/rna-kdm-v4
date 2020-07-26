@@ -36,6 +36,7 @@ const useShowdown = () => {
     aiDraw: () => dispatch(showdownSlice.actions.aiDraw()),
     aiWound: () => dispatch(showdownSlice.actions.aiWound()),
     aiUndoWound: () => dispatch(showdownSlice.actions.aiUndoWound()),
+    aiShuffleDiscard: () => dispatch(showdownSlice.actions.aiShuffleDiscard()),
   };
 
   return {
