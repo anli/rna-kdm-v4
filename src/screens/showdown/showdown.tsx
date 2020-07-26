@@ -15,6 +15,7 @@ const Component = () => {
       aiActives,
       aiDiscards,
       aiWounds,
+      selectedCardId,
     },
     actions: {
       terrainDraw,
@@ -26,26 +27,14 @@ const Component = () => {
       aiWound,
       aiUndoWound,
       aiShuffleDiscard,
+      aiActiveDiscard,
+      cardSelect,
+      aiUndoActive,
     },
   } = useShowdown();
 
   return (
     <View testID="ShowdownScreen">
-      {encounter && (
-        <List.Item
-          title={encounter.name}
-          right={(itemProps) => (
-            <>
-              <IconButton
-                {...itemProps}
-                icon="refresh"
-                onPress={showdownClear}
-              />
-            </>
-          )}
-        />
-      )}
-
       <Stats>
         {stats.map(({name, value}: {name: string; value: string}) => (
           <Stat
@@ -57,6 +46,26 @@ const Component = () => {
           />
         ))}
       </Stats>
+
+      {encounter && (
+        <List.Item
+          title={encounter.name}
+          right={(itemProps) => (
+            <>
+              <IconButton
+                {...itemProps}
+                icon="pin-off"
+                onPress={aiUndoActive}
+              />
+              <IconButton
+                {...itemProps}
+                icon="refresh"
+                onPress={showdownClear}
+              />
+            </>
+          )}
+        />
+      )}
 
       {quarry && (
         <Cards horizontal showsHorizontalScrollIndicator={false}>
@@ -73,6 +82,8 @@ const Component = () => {
               key={aiActive.id}
               data={aiActive}
               onPress={() => preview(aiActive.imageUrl)}
+              onLongPress={() => cardSelect(aiActive.id)}
+              selected={selectedCardId === aiActive.id}
             />
           ))}
         </Cards>
@@ -100,6 +111,7 @@ const Component = () => {
         title={`AI Cards (${aiDraws.length})`}
         right={(itemProps) => (
           <>
+            <IconButton {...itemProps} icon="pin" onPress={aiActiveDiscard} />
             <IconButton {...itemProps} icon="undo" onPress={aiShuffleDiscard} />
             <IconButton {...itemProps} icon="star" onPress={aiDraw} />
           </>

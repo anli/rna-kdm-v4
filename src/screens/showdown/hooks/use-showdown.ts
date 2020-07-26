@@ -2,9 +2,14 @@ import {useNavigation} from '@react-navigation/native';
 import {ShowdownSelectors, showdownSlice} from '@showdown';
 import {RootState} from '@store';
 import {terrainConfigsMap, TerrainService, terrainsMap} from '@terrain';
+import R from 'ramda';
+import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 const useShowdown = () => {
+  const [selectedCardId, setSelectedCardId] = useState<string | undefined>(
+    undefined,
+  );
   const {navigate} = useNavigation();
   const state = useSelector<RootState, RootState>((res) => res);
   const dispatch = useDispatch();
@@ -18,6 +23,7 @@ const useShowdown = () => {
     aiActives: ShowdownSelectors.getAiActives(state),
     aiDiscards: ShowdownSelectors.getAiDiscards(state),
     aiWounds: ShowdownSelectors.getAiWounds(state),
+    selectedCardId,
   };
 
   const actions = {
@@ -37,6 +43,18 @@ const useShowdown = () => {
     aiWound: () => dispatch(showdownSlice.actions.aiWound()),
     aiUndoWound: () => dispatch(showdownSlice.actions.aiUndoWound()),
     aiShuffleDiscard: () => dispatch(showdownSlice.actions.aiShuffleDiscard()),
+    aiActiveDiscard: () => dispatch(showdownSlice.actions.aiActiveDiscard()),
+    cardSelect: (id: string) => setSelectedCardId(id),
+    aiUndoActive: () => {
+      const selectedActiveId = R.find(R.propEq('id', selectedCardId))(
+        props.aiActives,
+      )?.id;
+
+      if (selectedActiveId) {
+        dispatch(showdownSlice.actions.aiUndoActive(selectedActiveId));
+        setSelectedCardId(undefined);
+      }
+    },
   };
 
   return {
