@@ -17,6 +17,13 @@ const useEncounterSelect = () => {
 
       const quarry = QuarryService.getQuarry(encounter.quarryId);
       dispatch(showdownSlice.actions.quarrySet(quarry));
+
+      const {draws: aiDraws, actives: aiActives} = EncounterService.getAiCards(
+        encounter.aiCardsConfig,
+        quarry.aiCardsMap,
+      );
+      dispatch(showdownSlice.actions.aiDrawsSet(aiDraws));
+      dispatch(showdownSlice.actions.aiActivesSet(aiActives));
     },
   };
 

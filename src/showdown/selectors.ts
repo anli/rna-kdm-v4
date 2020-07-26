@@ -45,10 +45,31 @@ const statsSelector = createSelector<
   encounter?.statsMap ? EncounterService.getStats(encounter.statsMap) : [],
 );
 
+const aiDrawsSelector = createSelector<
+  {showdown: ShowdownState},
+  ShowdownState,
+  any[]
+>(showdownSelector, (showdown) => showdown.aiDraws);
+
+const aiActivesSelector = createSelector<
+  {showdown: ShowdownState},
+  ShowdownState,
+  any[]
+>(showdownSelector, (showdown) => showdown.aiActives);
+
+const aiDiscardsSelector = createSelector<
+  {showdown: ShowdownState},
+  ShowdownState,
+  any[]
+>(showdownSelector, (showdown) => showdown.aiDiscards);
+
 export default class {
   static getTerrains = terrainsSelector;
   static getHasEncounter = hasEncounterSelector;
   static getEncounter = encounterSelector;
   static getQuarry = quarrySelector;
   static getStats = statsSelector;
+  static getAiDraws = aiDrawsSelector;
+  static getAiActives = aiActivesSelector;
+  static getAiDiscards = aiDiscardsSelector;
 }

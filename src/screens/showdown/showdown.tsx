@@ -6,8 +6,15 @@ import useShowdown from './hooks';
 
 const Component = () => {
   const {
-    props: {stats, terrains, encounter, quarry},
-    actions: {terrainDraw, showdownClear, preview, statIncrease, statDecrease},
+    props: {stats, terrains, encounter, quarry, aiDraws, aiActives, aiDiscards},
+    actions: {
+      terrainDraw,
+      showdownClear,
+      preview,
+      statIncrease,
+      statDecrease,
+      aiDraw,
+    },
   } = useShowdown();
 
   return (
@@ -49,6 +56,13 @@ const Component = () => {
             data={{name: 'Basic Action'}}
             onPress={() => preview(quarry.basicActionCardImageUrl)}
           />
+          {aiActives.map((aiActive) => (
+            <Card
+              key={aiActive.id}
+              data={aiActive}
+              onPress={() => preview(aiActive.imageUrl)}
+            />
+          ))}
         </Cards>
       )}
 
@@ -66,6 +80,24 @@ const Component = () => {
             key={terrain.id}
             data={terrain}
             onPress={() => preview(terrain.imageUrl)}
+          />
+        ))}
+      </Cards>
+
+      <List.Item
+        title={`AI Cards (${aiDraws.length})`}
+        right={(itemProps) => (
+          <>
+            <IconButton {...itemProps} icon="star" onPress={aiDraw} />
+          </>
+        )}
+      />
+      <Cards horizontal showsHorizontalScrollIndicator={false}>
+        {aiDiscards?.map((aiDiscard) => (
+          <Card
+            key={aiDiscard.id}
+            data={aiDiscard}
+            onPress={() => preview(aiDiscard.imageUrl)}
           />
         ))}
       </Cards>

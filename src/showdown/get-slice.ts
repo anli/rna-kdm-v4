@@ -7,12 +7,18 @@ export interface ShowdownState {
   terrains: Terrain[];
   encounter?: Encounter;
   quarry?: Quarry;
+  aiDraws: any[];
+  aiActives: any[];
+  aiDiscards: any[];
 }
 
 const INITIAL_STATE = {
   terrains: [],
   encounter: undefined,
   quarry: undefined,
+  aiDraws: [],
+  aiActives: [],
+  aiDiscards: [],
 };
 
 const getShowdownSlice = (initialState = INITIAL_STATE) =>
@@ -43,6 +49,19 @@ const getShowdownSlice = (initialState = INITIAL_STATE) =>
       statDecrease: (state: ShowdownState, action: PayloadAction<string>) => {
         if (state.encounter?.statsMap) {
           state.encounter.statsMap[action.payload]--;
+        }
+      },
+      aiDrawsSet: (state: ShowdownState, action: PayloadAction<any[]>) => {
+        state.aiDraws = action.payload;
+      },
+      aiActivesSet: (state: ShowdownState, action: PayloadAction<any[]>) => {
+        state.aiActives = action.payload;
+      },
+      aiDraw: (state: ShowdownState) => {
+        if (state.aiDraws.length > 0) {
+          const [topCard, ...aiDraws] = state.aiDraws;
+          state.aiDraws = aiDraws;
+          state.aiDiscards = [topCard, ...state.aiDiscards];
         }
       },
     },

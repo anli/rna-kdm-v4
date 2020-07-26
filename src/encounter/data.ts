@@ -1,16 +1,25 @@
 export type StatsMap = Record<string, number>;
+export interface AiCardsConfig {
+  levelACount?: number;
+  levelBCount?: number;
+  levelLCount?: number;
+  startingCardIds?: string[];
+  fixedCardIds?: string[];
+  topCardIds?: string[];
+}
 
 export interface Encounter {
   id: string;
   name: string;
   quarryId: string;
   statsMap: StatsMap;
+  aiCardsConfig: AiCardsConfig;
 }
 
 export const encountersMap: Record<string, Encounter> = {
-  WhiteLionLevel1: {
-    id: 'WhiteLionLevel1',
-    name: 'White Lion Level 1',
+  WhiteLionFirstStory: {
+    id: 'WhiteLionFirstStory',
+    name: 'White Lion First Story',
     quarryId: 'WhiteLion',
     statsMap: {
       MOV: 6,
@@ -20,10 +29,22 @@ export const encountersMap: Record<string, Encounter> = {
       ACC: 0,
       LCK: 0,
     },
+    aiCardsConfig: {
+      fixedCardIds: [
+        'WHITE_LION_AI_CHOMP',
+        'WHITE_LION_AI_SIZE_UP',
+        'WHITE_LION_AI_POWER_SWAT',
+        'WHITE_LION_AI_GRASP',
+        'WHITE_LION_AI_MAUL',
+        'WHITE_LION_AI_TERRIFYING_ROAR',
+        'WHITE_LION_AI_ENRAGED',
+      ],
+      topCardIds: ['WHITE_LION_AI_CLAW'],
+    },
   },
-  WhiteLionLevel2: {
-    id: 'WhiteLionLevel2',
-    name: 'White Lion Level 2',
+  WhiteLionLevel1: {
+    id: 'WhiteLionLevel1',
+    name: 'White Lion Level 1',
     quarryId: 'WhiteLion',
     statsMap: {
       MOV: 6,
@@ -33,18 +54,46 @@ export const encountersMap: Record<string, Encounter> = {
       ACC: 0,
       LCK: 0,
     },
+    aiCardsConfig: {
+      levelACount: 3,
+      levelBCount: 7,
+    },
+  },
+  WhiteLionLevel2: {
+    id: 'WhiteLionLevel2',
+    name: 'White Lion Level 2',
+    quarryId: 'WhiteLion',
+    statsMap: {
+      MOV: 7,
+      TGH: 10,
+      SPD: 1,
+      DMG: 1,
+      ACC: 0,
+      LCK: 0,
+    },
+    aiCardsConfig: {
+      levelACount: 5,
+      levelBCount: 10,
+      startingCardIds: ['WHITE_LION_AI_CUNNING'],
+    },
   },
   WhiteLionLevel3: {
     id: 'WhiteLionLevel3',
     name: 'White Lion Level 3',
     quarryId: 'WhiteLion',
     statsMap: {
-      MOV: 7,
-      TGH: 11,
-      SPD: 1,
-      DMG: 1,
-      ACC: 0,
+      MOV: 8,
+      TGH: 14,
+      SPD: 2,
+      DMG: 2,
+      ACC: 2,
       LCK: 1,
+    },
+    aiCardsConfig: {
+      levelACount: 9,
+      levelBCount: 10,
+      levelLCount: 2,
+      startingCardIds: ['WHITE_LION_AI_CUNNING', 'WHITE_LION_AI_MERCILESS'],
     },
   },
 };

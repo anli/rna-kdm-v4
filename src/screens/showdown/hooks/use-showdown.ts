@@ -14,6 +14,9 @@ const useShowdown = () => {
     terrains: ShowdownSelectors.getTerrains(state),
     quarry: ShowdownSelectors.getQuarry(state),
     stats: ShowdownSelectors.getStats(state),
+    aiDraws: ShowdownSelectors.getAiDraws(state),
+    aiActives: ShowdownSelectors.getAiActives(state),
+    aiDiscards: ShowdownSelectors.getAiDiscards(state),
   };
 
   const actions = {
@@ -29,6 +32,7 @@ const useShowdown = () => {
       dispatch(showdownSlice.actions.statIncrease(id)),
     statDecrease: (id: string) =>
       dispatch(showdownSlice.actions.statDecrease(id)),
+    aiDraw: () => dispatch(showdownSlice.actions.aiDraw()),
   };
 
   return {
