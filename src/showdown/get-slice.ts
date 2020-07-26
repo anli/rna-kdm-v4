@@ -10,6 +10,7 @@ export interface ShowdownState {
   aiDraws: any[];
   aiActives: any[];
   aiDiscards: any[];
+  aiWounds: any[];
 }
 
 const INITIAL_STATE = {
@@ -19,6 +20,7 @@ const INITIAL_STATE = {
   aiDraws: [],
   aiActives: [],
   aiDiscards: [],
+  aiWounds: [],
 };
 
 const getShowdownSlice = (initialState = INITIAL_STATE) =>
@@ -62,6 +64,20 @@ const getShowdownSlice = (initialState = INITIAL_STATE) =>
           const [topCard, ...aiDraws] = state.aiDraws;
           state.aiDraws = aiDraws;
           state.aiDiscards = [topCard, ...state.aiDiscards];
+        }
+      },
+      aiWound: (state: ShowdownState) => {
+        if (state.aiDraws.length > 0) {
+          const [topCard, ...aiDraws] = state.aiDraws;
+          state.aiDraws = aiDraws;
+          state.aiWounds = [topCard, ...state.aiWounds];
+        }
+      },
+      aiUndoWound: (state: ShowdownState) => {
+        if (state.aiWounds.length > 0) {
+          const [topCard, ...aiWounds] = state.aiWounds;
+          state.aiWounds = aiWounds;
+          state.aiDraws = [topCard, ...state.aiDraws];
         }
       },
     },

@@ -17,6 +17,7 @@ const useShowdown = () => {
     aiDraws: ShowdownSelectors.getAiDraws(state),
     aiActives: ShowdownSelectors.getAiActives(state),
     aiDiscards: ShowdownSelectors.getAiDiscards(state),
+    aiWounds: ShowdownSelectors.getAiWounds(state),
   };
 
   const actions = {
@@ -33,6 +34,8 @@ const useShowdown = () => {
     statDecrease: (id: string) =>
       dispatch(showdownSlice.actions.statDecrease(id)),
     aiDraw: () => dispatch(showdownSlice.actions.aiDraw()),
+    aiWound: () => dispatch(showdownSlice.actions.aiWound()),
+    aiUndoWound: () => dispatch(showdownSlice.actions.aiUndoWound()),
   };
 
   return {

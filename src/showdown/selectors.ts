@@ -63,6 +63,12 @@ const aiDiscardsSelector = createSelector<
   any[]
 >(showdownSelector, (showdown) => showdown.aiDiscards);
 
+const aiWoundsSelector = createSelector<
+  {showdown: ShowdownState},
+  ShowdownState,
+  any[]
+>(showdownSelector, (showdown) => showdown.aiWounds);
+
 export default class {
   static getTerrains = terrainsSelector;
   static getHasEncounter = hasEncounterSelector;
@@ -72,4 +78,5 @@ export default class {
   static getAiDraws = aiDrawsSelector;
   static getAiActives = aiActivesSelector;
   static getAiDiscards = aiDiscardsSelector;
+  static getAiWounds = aiWoundsSelector;
 }

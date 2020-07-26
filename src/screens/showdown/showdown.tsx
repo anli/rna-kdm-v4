@@ -6,7 +6,16 @@ import useShowdown from './hooks';
 
 const Component = () => {
   const {
-    props: {stats, terrains, encounter, quarry, aiDraws, aiActives, aiDiscards},
+    props: {
+      stats,
+      terrains,
+      encounter,
+      quarry,
+      aiDraws,
+      aiActives,
+      aiDiscards,
+      aiWounds,
+    },
     actions: {
       terrainDraw,
       showdownClear,
@@ -14,6 +23,8 @@ const Component = () => {
       statIncrease,
       statDecrease,
       aiDraw,
+      aiWound,
+      aiUndoWound,
     },
   } = useShowdown();
 
@@ -101,6 +112,15 @@ const Component = () => {
           />
         ))}
       </Cards>
+      <List.Item
+        title={`Wounds (${aiWounds.length})`}
+        right={(itemProps) => (
+          <>
+            <IconButton {...itemProps} icon="undo" onPress={aiUndoWound} />
+            <IconButton {...itemProps} icon="plus" onPress={aiWound} />
+          </>
+        )}
+      />
     </View>
   );
 };
