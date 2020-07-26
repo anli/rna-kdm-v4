@@ -3,6 +3,7 @@ import {Quarry} from '@quarry';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Terrain} from '@terrain';
 import {shuffle} from '@utils';
+import FastImage from 'react-native-fast-image';
 
 export interface ShowdownState {
   terrains: Terrain[];
@@ -56,6 +57,7 @@ const getShowdownSlice = (initialState = INITIAL_STATE) =>
       },
       aiDrawsSet: (state: ShowdownState, action: PayloadAction<any[]>) => {
         state.aiDraws = action.payload;
+        preloadImageCards(action.payload);
       },
       aiActivesSet: (state: ShowdownState, action: PayloadAction<any[]>) => {
         state.aiActives = action.payload;
@@ -91,3 +93,10 @@ const getShowdownSlice = (initialState = INITIAL_STATE) =>
   });
 
 export default getShowdownSlice;
+
+const preloadImageCards = (cards: {imageUrl: string}[]) => {
+  const imageUrls = cards.map(({imageUrl}) => ({
+    uri: imageUrl,
+  }));
+  FastImage.preload(imageUrls);
+};
