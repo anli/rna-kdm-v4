@@ -43,7 +43,15 @@ const useShowdown = () => {
     aiWound: () => dispatch(showdownSlice.actions.aiWound()),
     aiUndoWound: () => dispatch(showdownSlice.actions.aiUndoWound()),
     aiShuffleDiscard: () => dispatch(showdownSlice.actions.aiShuffleDiscard()),
-    aiActiveDiscard: () => dispatch(showdownSlice.actions.aiActiveDiscard()),
+    aiActiveDiscard: () => {
+      const selectedDiscardId = R.find(R.propEq('id', selectedCardId))(
+        props.aiDiscards,
+      )?.id;
+      if (selectedDiscardId) {
+        dispatch(showdownSlice.actions.aiActiveDiscard(selectedDiscardId));
+        setSelectedCardId(undefined);
+      }
+    },
     cardSelect: (id: string) => setSelectedCardId(id),
     aiUndoActive: () => {
       const selectedActiveId = R.find(R.propEq('id', selectedCardId))(
@@ -52,6 +60,17 @@ const useShowdown = () => {
 
       if (selectedActiveId) {
         dispatch(showdownSlice.actions.aiUndoActive(selectedActiveId));
+        setSelectedCardId(undefined);
+      }
+    },
+    aiHealWound: () => dispatch(showdownSlice.actions.aiHealWound()),
+    aiTopDrawDiscard: () => {
+      const selectedDiscardId = R.find(R.propEq('id', selectedCardId))(
+        props.aiDiscards,
+      )?.id;
+
+      if (selectedDiscardId) {
+        dispatch(showdownSlice.actions.aiTopDrawDiscard(selectedDiscardId));
         setSelectedCardId(undefined);
       }
     },

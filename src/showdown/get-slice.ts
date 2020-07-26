@@ -90,22 +90,45 @@ const getShowdownSlice = (initialState = INITIAL_STATE) =>
           state.aiDiscards = [];
         }
       },
-      aiActiveDiscard: (state: ShowdownState) => {
-        if (state.aiDiscards.length > 0) {
-          const [topCard, ...aiDiscards] = state.aiDiscards;
-          state.aiDiscards = aiDiscards;
-          state.aiActives = [topCard, ...state.aiActives];
-        }
+      aiActiveDiscard: (
+        state: ShowdownState,
+        action: PayloadAction<string>,
+      ) => {
+        const [from, to] = shiftFromTo(
+          action.payload,
+          state.aiDiscards,
+          state.aiActives,
+        );
+        state.aiDiscards = from;
+        state.aiActives = to;
       },
       aiUndoActive: (state: ShowdownState, action: PayloadAction<string>) => {
-        const card = R.find(R.propEq('id', action.payload))(state.aiActives);
-
-        if (card) {
-          state.aiActives = R.reject(R.propEq('id', action.payload))(
-            state.aiActives,
-          );
-          state.aiDiscards = [card, ...state.aiDiscards];
+        const [from, to] = shiftFromTo(
+          action.payload,
+          state.aiActives,
+          state.aiDiscards,
+        );
+        state.aiActives = from;
+        state.aiDiscards = to;
+      },
+      aiHealWound: (state: ShowdownState) => {
+        if (state.aiWounds.length > 0) {
+          const [card, ...aiWounds] = state.aiWounds;
+          state.aiWounds = aiWounds;
+          state.aiDraws = [...state.aiDraws, card];
         }
+      },
+      aiTopDrawDiscard: (
+        state: ShowdownState,
+        action: PayloadAction<string>,
+      ) => {
+        const [from, to] = shiftFromTo(
+          action.payload,
+          state.aiDiscards,
+          state.aiDraws,
+        );
+        state.aiDiscards = from;
+        state.aiDraws = to;
       },
     },
   });
@@ -117,4 +140,15 @@ const preloadImageCards = (cards: {imageUrl: string}[]) => {
     uri: imageUrl,
   }));
   FastImage.preload(imageUrls);
+};
+
+const shiftFromTo = (id: string, from: any[], to: any[]) => {
+  const card = R.find(R.propEq('id', id))(from);
+  if (card) {
+    const shiftedFrom = R.reject(R.propEq('id', id))(from);
+    const shiftedTo = [card, ...to];
+    return [shiftedFrom, shiftedTo];
+  }
+
+  return [from, to];
 };

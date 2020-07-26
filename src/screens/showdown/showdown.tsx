@@ -30,6 +30,8 @@ const Component = () => {
       aiActiveDiscard,
       cardSelect,
       aiUndoActive,
+      aiHealWound,
+      aiTopDrawDiscard,
     },
   } = useShowdown();
 
@@ -52,11 +54,13 @@ const Component = () => {
           title={encounter.name}
           right={(itemProps) => (
             <>
-              <IconButton
-                {...itemProps}
-                icon="pin-off"
-                onPress={aiUndoActive}
-              />
+              {selectedCardId && (
+                <IconButton
+                  {...itemProps}
+                  icon="pin-off"
+                  onPress={aiUndoActive}
+                />
+              )}
               <IconButton
                 {...itemProps}
                 icon="refresh"
@@ -111,8 +115,21 @@ const Component = () => {
         title={`AI Cards (${aiDraws.length})`}
         right={(itemProps) => (
           <>
-            <IconButton {...itemProps} icon="pin" onPress={aiActiveDiscard} />
-            <IconButton {...itemProps} icon="undo" onPress={aiShuffleDiscard} />
+            {selectedCardId && (
+              <IconButton
+                {...itemProps}
+                icon="arrow-collapse-down"
+                onPress={aiTopDrawDiscard}
+              />
+            )}
+            {selectedCardId && (
+              <IconButton {...itemProps} icon="pin" onPress={aiActiveDiscard} />
+            )}
+            <IconButton
+              {...itemProps}
+              icon="refresh"
+              onPress={aiShuffleDiscard}
+            />
             <IconButton {...itemProps} icon="star" onPress={aiDraw} />
           </>
         )}
@@ -123,6 +140,8 @@ const Component = () => {
             key={aiDiscard.id}
             data={aiDiscard}
             onPress={() => preview(aiDiscard.imageUrl)}
+            onLongPress={() => cardSelect(aiDiscard.id)}
+            selected={selectedCardId === aiDiscard.id}
           />
         ))}
       </Cards>
@@ -130,6 +149,11 @@ const Component = () => {
         title={`Wounds (${aiWounds.length})`}
         right={(itemProps) => (
           <>
+            <IconButton
+              {...itemProps}
+              icon="arrow-collapse-up"
+              onPress={aiHealWound}
+            />
             <IconButton {...itemProps} icon="undo" onPress={aiUndoWound} />
             <IconButton {...itemProps} icon="plus" onPress={aiWound} />
           </>
