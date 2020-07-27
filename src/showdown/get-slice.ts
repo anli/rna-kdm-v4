@@ -1,5 +1,5 @@
 import {Encounter} from '@encounter';
-import {Quarry} from '@quarry';
+import {Quarry, QuarryService} from '@quarry';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Terrain} from '@terrain';
 import {shuffle} from '@utils';
@@ -14,6 +14,9 @@ export interface ShowdownState {
   aiActives: any[];
   aiDiscards: any[];
   aiWounds: any[];
+  hitDraws: any[];
+  hitDiscards: any[];
+  hitActives: any[];
 }
 
 const INITIAL_STATE = {
@@ -24,6 +27,9 @@ const INITIAL_STATE = {
   aiActives: [],
   aiDiscards: [],
   aiWounds: [],
+  hitDraws: [],
+  hitDiscards: [],
+  hitActives: [],
 };
 
 const getShowdownSlice = (initialState = INITIAL_STATE) =>
@@ -129,6 +135,47 @@ const getShowdownSlice = (initialState = INITIAL_STATE) =>
         );
         state.aiDiscards = from;
         state.aiDraws = to;
+      },
+      hitDrawsSet: (state: ShowdownState, action: PayloadAction<string>) => {
+        const hitDraws = R.values(
+          QuarryService.getQuarry(action.payload).hitCardsMap,
+        );
+        state.hitDraws = hitDraws;
+        preloadImageCards(hitDraws);
+      },
+      hitDraw: (state: ShowdownState) => {
+        if (state.hitDraws.length > 0) {
+          const [topCard, ...hitDraws] = state.hitDraws;
+          state.hitDraws = hitDraws;
+          state.hitDiscards = [topCard, ...state.hitDiscards];
+        }
+      },
+      hitShuffleDiscard: (state: ShowdownState) => {
+        if (state.hitDiscards.length > 0) {
+          state.hitDraws = shuffle([...state.hitDraws, ...state.hitDiscards]);
+          state.hitDiscards = [];
+        }
+      },
+      hitActiveDiscard: (
+        state: ShowdownState,
+        action: PayloadAction<string>,
+      ) => {
+        const [from, to] = shiftFromTo(
+          action.payload,
+          state.hitDiscards,
+          state.hitActives,
+        );
+        state.hitDiscards = from;
+        state.hitActives = to;
+      },
+      hitUndoActive: (state: ShowdownState, action: PayloadAction<string>) => {
+        const [from, to] = shiftFromTo(
+          action.payload,
+          state.hitActives,
+          state.hitDiscards,
+        );
+        state.hitActives = from;
+        state.hitDiscards = to;
       },
     },
   });

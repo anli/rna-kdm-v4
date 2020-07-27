@@ -24,6 +24,7 @@ const useEncounterSelect = () => {
       );
       dispatch(showdownSlice.actions.aiDrawsSet(aiDraws));
       dispatch(showdownSlice.actions.aiActivesSet(aiActives));
+      dispatch(showdownSlice.actions.hitDrawsSet(quarry.id));
     },
   };
 

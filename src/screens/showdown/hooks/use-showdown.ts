@@ -10,6 +10,9 @@ const useShowdown = () => {
   const [selectedCardId, setSelectedCardId] = useState<string | undefined>(
     undefined,
   );
+  const [selectedCardTypeId, setSelectedCardTypeId] = useState<
+    string | undefined
+  >(undefined);
   const {navigate} = useNavigation();
   const state = useSelector<RootState, RootState>((res) => res);
   const dispatch = useDispatch();
@@ -24,35 +27,71 @@ const useShowdown = () => {
     aiDiscards: ShowdownSelectors.getAiDiscards(state),
     aiWounds: ShowdownSelectors.getAiWounds(state),
     selectedCardId,
+    selectedCardTypeId,
+    hitDraws: ShowdownSelectors.getHitDraws(state),
+    hitDiscards: ShowdownSelectors.getHitDiscards(state),
+    hitActives: ShowdownSelectors.getHitActives(state),
+  };
+
+  const selectedClear = () => {
+    setSelectedCardId(undefined);
+    setSelectedCardTypeId(undefined);
   };
 
   const actions = {
-    terrainDraw: () =>
+    terrainDraw: () => {
+      selectedClear();
       dispatch(
         showdownSlice.actions.terrainSet(
           TerrainService.getTerrains(terrainConfigsMap.WhiteLion, terrainsMap),
         ),
-      ),
-    showdownClear: () => dispatch(showdownSlice.actions.showdownClear()),
-    preview: (imageUrl: string) => navigate('PreviewScreen', {imageUrl}),
-    statIncrease: (id: string) =>
-      dispatch(showdownSlice.actions.statIncrease(id)),
-    statDecrease: (id: string) =>
-      dispatch(showdownSlice.actions.statDecrease(id)),
-    aiDraw: () => dispatch(showdownSlice.actions.aiDraw()),
-    aiWound: () => dispatch(showdownSlice.actions.aiWound()),
-    aiUndoWound: () => dispatch(showdownSlice.actions.aiUndoWound()),
-    aiShuffleDiscard: () => dispatch(showdownSlice.actions.aiShuffleDiscard()),
+      );
+    },
+    showdownClear: () => {
+      selectedClear();
+      dispatch(showdownSlice.actions.showdownClear());
+    },
+    preview: (imageUrl: string) => {
+      selectedClear();
+      navigate('PreviewScreen', {imageUrl});
+    },
+    statIncrease: (id: string) => {
+      selectedClear();
+      dispatch(showdownSlice.actions.statIncrease(id));
+    },
+    statDecrease: (id: string) => {
+      selectedClear();
+      dispatch(showdownSlice.actions.statDecrease(id));
+    },
+    aiDraw: () => {
+      selectedClear();
+      dispatch(showdownSlice.actions.aiDraw());
+    },
+    aiWound: () => {
+      selectedClear();
+      dispatch(showdownSlice.actions.aiWound());
+    },
+    aiUndoWound: () => {
+      selectedClear();
+      dispatch(showdownSlice.actions.aiUndoWound());
+    },
+    aiShuffleDiscard: () => {
+      selectedClear();
+      dispatch(showdownSlice.actions.aiShuffleDiscard());
+    },
     aiActiveDiscard: () => {
       const selectedDiscardId = R.find(R.propEq('id', selectedCardId))(
         props.aiDiscards,
       )?.id;
       if (selectedDiscardId) {
         dispatch(showdownSlice.actions.aiActiveDiscard(selectedDiscardId));
-        setSelectedCardId(undefined);
+        selectedClear();
       }
     },
-    cardSelect: (id: string) => setSelectedCardId(id),
+    cardSelect: (id: string, type: string) => {
+      setSelectedCardId(id);
+      setSelectedCardTypeId(type);
+    },
     aiUndoActive: () => {
       const selectedActiveId = R.find(R.propEq('id', selectedCardId))(
         props.aiActives,
@@ -60,10 +99,13 @@ const useShowdown = () => {
 
       if (selectedActiveId) {
         dispatch(showdownSlice.actions.aiUndoActive(selectedActiveId));
-        setSelectedCardId(undefined);
+        selectedClear();
       }
     },
-    aiHealWound: () => dispatch(showdownSlice.actions.aiHealWound()),
+    aiHealWound: () => {
+      selectedClear();
+      dispatch(showdownSlice.actions.aiHealWound());
+    },
     aiTopDrawDiscard: () => {
       const selectedDiscardId = R.find(R.propEq('id', selectedCardId))(
         props.aiDiscards,
@@ -71,7 +113,34 @@ const useShowdown = () => {
 
       if (selectedDiscardId) {
         dispatch(showdownSlice.actions.aiTopDrawDiscard(selectedDiscardId));
-        setSelectedCardId(undefined);
+        selectedClear();
+      }
+    },
+    hitShuffleDiscard: () => {
+      selectedClear();
+      dispatch(showdownSlice.actions.hitShuffleDiscard());
+    },
+    hitDraw: () => {
+      selectedClear();
+      dispatch(showdownSlice.actions.hitDraw());
+    },
+    hitActiveDiscard: () => {
+      const selectedDiscardId = R.find(R.propEq('id', selectedCardId))(
+        props.hitDiscards,
+      )?.id;
+      if (selectedDiscardId) {
+        dispatch(showdownSlice.actions.hitActiveDiscard(selectedDiscardId));
+        selectedClear();
+      }
+    },
+    hitUndoActive: () => {
+      const selectedActiveId = R.find(R.propEq('id', selectedCardId))(
+        props.hitActives,
+      )?.id;
+
+      if (selectedActiveId) {
+        dispatch(showdownSlice.actions.hitUndoActive(selectedActiveId));
+        selectedClear();
       }
     },
   };
