@@ -1,3 +1,4 @@
+import {butcherAiCardsMap, butcherHitCardsMap} from './butcher';
 import {
   screamingAntelopeAiCardsMap,
   screamingAntelopeHitCardsMap,
@@ -44,5 +45,13 @@ export const quarriesMap: Record<string, Quarry> = {
     basicActionCardImageUrl: 'https://imgur.com/iZQ3AGN.png',
     aiCardsMap: screamingAntelopeAiCardsMap,
     hitCardsMap: screamingAntelopeHitCardsMap,
+  },
+  Butcher: {
+    id: 'Butcher',
+    name: 'Butcher',
+    monsterCardImageUrl: 'https://imgur.com/ux5kS6O.png',
+    basicActionCardImageUrl: 'https://imgur.com/RuXLMxx.png',
+    aiCardsMap: butcherAiCardsMap,
+    hitCardsMap: butcherHitCardsMap,
   },
 };
