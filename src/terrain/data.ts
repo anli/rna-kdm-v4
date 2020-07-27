@@ -72,4 +72,8 @@ export const terrainConfigsMap: Record<string, TerrainConfig> = {
     randomTerrainCount: 2,
     compulsoryTerrainIds: ['TwoTallGrass'],
   },
+  ScreamingAntelope: {
+    randomTerrainCount: 2,
+    compulsoryTerrainIds: ['TwoAcanthusPlants', 'BugPatch'],
+  },
 };

@@ -1,28 +1,4 @@
-export interface AiCard {
-  id: string;
-  name: string;
-  imageUrl: string;
-  type: string;
-  subType: string;
-  level: string;
-}
-
-export interface HitCard {
-  id: string;
-  name: string;
-  imageUrl: string;
-}
-
-export interface Quarry {
-  id: string;
-  name: string;
-  monsterCardImageUrl: string;
-  basicActionCardImageUrl: string;
-  aiCardsMap: Record<string, AiCard>;
-  hitCardsMap: Record<string, HitCard>;
-}
-
-const whiteLionAiCardsMap = {
+export const whiteLionAiCardsMap = {
   WHITE_LION_AI_ALERT: {
     id: 'WHITE_LION_AI_ALERT',
     imageUrl: 'https://imgur.com/PDhAtjC.png',
@@ -227,7 +203,7 @@ const whiteLionAiCardsMap = {
   },
 };
 
-const whiteLionHitCardsMap = {
+export const whiteLionHitCardsMap = {
   WHITE_LION_HIT_BEASTS_BACK: {
     id: 'WHITE_LION_HIT_BEASTS_BACK',
     imageUrl: 'https://imgur.com/RbI8u22.png',
@@ -365,16 +341,5 @@ const whiteLionHitCardsMap = {
     imageUrl: 'https://imgur.com/3zbe2YU.png',
     name: 'Strange Hand',
     type: 'HIT',
-  },
-};
-
-export const quarriesMap: Record<string, Quarry> = {
-  WhiteLion: {
-    id: 'WhiteLion',
-    name: 'White Lion',
-    monsterCardImageUrl: 'https://imgur.com/6voXSGA.png',
-    basicActionCardImageUrl: 'https://imgur.com/rmgHnYU.png',
-    aiCardsMap: whiteLionAiCardsMap,
-    hitCardsMap: whiteLionHitCardsMap,
   },
 };

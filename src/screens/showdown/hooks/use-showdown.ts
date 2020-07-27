@@ -41,11 +41,16 @@ const useShowdown = () => {
   const actions = {
     terrainDraw: () => {
       selectedClear();
-      dispatch(
-        showdownSlice.actions.terrainSet(
-          TerrainService.getTerrains(terrainConfigsMap.WhiteLion, terrainsMap),
-        ),
-      );
+      if (props.quarry?.id) {
+        dispatch(
+          showdownSlice.actions.terrainSet(
+            TerrainService.getTerrains(
+              terrainConfigsMap[props.quarry.id],
+              terrainsMap,
+            ),
+          ),
+        );
+      }
     },
     showdownClear: () => {
       selectedClear();
