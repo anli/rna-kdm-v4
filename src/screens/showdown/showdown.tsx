@@ -264,9 +264,9 @@ const Screen = styled.SafeAreaView`
 
 const Top = styled.View`
   background-color: lightgray;
-  flex: 1;
+  flex: 4;
 `;
 
 const Bottom = styled.View`
-  flex: 1;
+  flex: 6;
 `;
