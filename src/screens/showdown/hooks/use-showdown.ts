@@ -2,15 +2,20 @@ import {useNavigation} from '@react-navigation/native';
 import {ShowdownSelectors, showdownSlice} from '@showdown';
 import {RootState} from '@store';
 import {terrainConfigsMap, TerrainService, terrainsMap} from '@terrain';
+import {useScreenDimensions} from '@utils';
 import R from 'ramda';
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 const useShowdown = () => {
+  const {isLandscape} = useScreenDimensions();
   const [selectedCardId, setSelectedCardId] = useState<string | undefined>(
     undefined,
   );
   const [selectedCardTypeId, setSelectedCardTypeId] = useState<
+    string | undefined
+  >(undefined);
+  const [selectedCardImageUrl, setSelectedCardImageUrl] = useState<
     string | undefined
   >(undefined);
   const {navigate} = useNavigation();
@@ -31,11 +36,13 @@ const useShowdown = () => {
     hitDraws: ShowdownSelectors.getHitDraws(state),
     hitDiscards: ShowdownSelectors.getHitDiscards(state),
     hitActives: ShowdownSelectors.getHitActives(state),
+    selectedCardImageUrl,
   };
 
   const selectedClear = () => {
     setSelectedCardId(undefined);
     setSelectedCardTypeId(undefined);
+    setSelectedCardImageUrl(undefined);
   };
 
   const actions = {
@@ -58,7 +65,12 @@ const useShowdown = () => {
     },
     preview: (imageUrl: string) => {
       selectedClear();
-      navigate('PreviewScreen', {imageUrl});
+
+      if (isLandscape) {
+        return setSelectedCardImageUrl(imageUrl);
+      }
+
+      return navigate('PreviewScreen', {imageUrl});
     },
     statIncrease: (id: string) => {
       selectedClear();

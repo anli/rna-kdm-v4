@@ -1,7 +1,7 @@
+import {Image} from '@components';
 import React from 'react';
 import {Button} from 'react-native-paper';
 import styled from 'styled-components/native';
-import {Image} from './components';
 import usePreview from './hooks';
 
 const Component = () => {
