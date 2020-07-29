@@ -1,8 +1,9 @@
 {
-  "name": "KDM",
-  "version": "0.0.1",
+  "name": "rna-kdm",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
+    "cd:android": "bundle exec fastlane android build",
     "ci:test": "npm run lint && npm run test -- --coverage",
     "ci:e2e:ios": "detox build -c ios.sim.release && detox test -c ios.sim.release --cleanup",
     "ci:e2e:android": "detox build -c android.emu.release && detox test -c android.emu.release",

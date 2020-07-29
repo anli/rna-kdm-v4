@@ -63,3 +63,6 @@ buck-out/
 /ios/Pods/
 coverage
 tmp
+
+certs/playstore.json
+fastlane/report.xml
