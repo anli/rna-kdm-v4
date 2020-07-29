@@ -1,1 +1,1 @@
-export default from './use-preview'
+export {default} from './use-preview';

@@ -4,7 +4,7 @@ import React from 'react';
 import {ScrollView} from 'react-native';
 import {IconButton, List} from 'react-native-paper';
 import styled from 'styled-components/native';
-import {Card, Cards, Stat, Stats} from './components';
+import {Card, Cards, DiceRollers, Stat, Stats} from './components';
 import useShowdown from './hooks';
 
 const Component = () => {
@@ -244,8 +244,10 @@ const Component = () => {
               />
             ))}
           </Cards>
+          <EmptyRow />
         </ScrollView>
       </Bottom>
+      <DiceRollers />
     </Screen>
   );
 };
@@ -269,4 +271,8 @@ const Top = styled.View`
 
 const Bottom = styled.View`
   flex: 6;
+`;
+
+const EmptyRow = styled.View`
+  height: 32px;
 `;
