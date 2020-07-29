@@ -64,9 +64,9 @@ const DiceRollers = () => {
 
   return (
     <FabContainer>
-      <FAB small icon={diceSixIcon} onPress={rollDiceSix} />
-      <FAB small icon={diceHitIcon} onPress={rollDiceHit} />
-      <FAB small icon={diceTenIcon} onPress={rollDiceTen} />
+      <FAB icon={diceSixIcon} onPress={rollDiceSix} />
+      <FAB icon={diceHitIcon} onPress={rollDiceHit} />
+      <FAB icon={diceTenIcon} onPress={rollDiceTen} />
     </FabContainer>
   );
 };
@@ -83,5 +83,5 @@ const FabContainer = styled.View`
 `;
 
 const FAB = styled(FABNative)`
-  margin-right: 8px;
+  margin-right: 16px;
 `;
