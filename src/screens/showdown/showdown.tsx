@@ -274,5 +274,5 @@ const Bottom = styled.View`
 `;
 
 const EmptyRow = styled.View`
-  height: 32px;
+  height: 48px;
 `;
