@@ -76,4 +76,8 @@ export const terrainConfigsMap: Record<string, TerrainConfig> = {
     randomTerrainCount: 2,
     compulsoryTerrainIds: ['TwoAcanthusPlants', 'BugPatch'],
   },
+  Butcher: {
+    randomTerrainCount: 1,
+    compulsoryTerrainIds: ['ThreeStoneColumns'],
+  },
 };
