@@ -1,6 +1,7 @@
 import {shuffle} from '@utils';
 import React, {useState} from 'react';
 import {FAB as FABNative} from 'react-native-paper';
+import IconNative from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled from 'styled-components/native';
 
 const DICE_SIX_FACES = [
@@ -64,14 +65,41 @@ const DiceRollers = () => {
 
   return (
     <FabContainer>
-      <FAB icon={diceSixIcon} onPress={rollDiceSix} />
-      <FAB icon={diceHitIcon} onPress={rollDiceHit} />
-      <FAB icon={diceTenIcon} onPress={rollDiceTen} />
+      <FAB
+        key="diceSixIcon"
+        icon={({size, color}: any) => (
+          <Icon name={diceSixIcon} size={size} color={color} />
+        )}
+        onPress={rollDiceSix}
+      />
+      <FAB
+        key="diceHitIcon"
+        icon={({size, color}: any) => (
+          <Icon name={diceHitIcon} size={size} color={color} />
+        )}
+        onPress={rollDiceHit}
+      />
+      <FAB
+        icon={({size, color}: any) => (
+          <Icon name={diceTenIcon} size={size} color={color} />
+        )}
+        onPress={rollDiceTen}
+      />
     </FabContainer>
   );
 };
 
 export default DiceRollers;
+
+const Icon = ({
+  name,
+  size,
+  color,
+}: {
+  name: string;
+  size: number;
+  color: string;
+}) => <IconStyled name={name} size={2 * size} color={color} />;
 
 const FabContainer = styled.View`
   flex-direction: row;
@@ -84,4 +112,11 @@ const FabContainer = styled.View`
 
 const FAB = styled(FABNative)`
   margin-right: 16px;
+`;
+
+const IconStyled = styled(IconNative)`
+  width: 48px;
+  height: 48px;
+  top: -12px;
+  left: -12px;
 `;
