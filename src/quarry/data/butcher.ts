@@ -1,0 +1,230 @@
+export const butcherAiCardsMap = {
+  Backhand: {
+    id: 'Backhand',
+    name: 'Backhand',
+    imageUrl: 'https://imgur.com/pgLKCeT.png',
+    level: 'B',
+  },
+  Berserker: {
+    id: 'Berserker',
+    name: 'Berserker',
+    imageUrl: 'https://imgur.com/Qkhbxnv.png',
+    level: 'S',
+  },
+  ButcherRoar: {
+    id: 'ButcherRoar',
+    name: 'Butcher Roar',
+    imageUrl: 'https://imgur.com/OVUGERy.png',
+    level: 'B',
+  },
+  DevourLantern: {
+    id: 'DevourLantern',
+    name: 'Devour Lantern',
+    imageUrl: 'https://imgur.com/UFBCAiy.png',
+    level: 'A',
+  },
+  DoubleHack: {
+    id: 'DoubleHack',
+    name: 'Double Hack',
+    imageUrl: 'https://imgur.com/Mq1TeNr.png',
+    level: 'A',
+  },
+  DreadedTrophies: {
+    id: 'DreadedTrophies',
+    name: 'Dreaded Trophies',
+    imageUrl: 'https://imgur.com/EDmUvdx.png',
+    level: 'S',
+  },
+  EmbraceThePain: {
+    id: 'EmbraceThePain',
+    name: 'Embrace The Pain',
+    imageUrl: 'https://imgur.com/F2QklYb.png',
+    level: 'A',
+  },
+  FastTarget: {
+    id: 'FastTarget',
+    name: 'Fast Target',
+    imageUrl: 'https://imgur.com/j2FA5oN.png',
+    level: 'S',
+  },
+  ForbiddenLight: {
+    id: 'ForbiddenLight',
+    name: 'Forbidden Light',
+    imageUrl: 'https://imgur.com/v1JjzHK.png',
+    level: 'A',
+  },
+  FrenziedBerserker: {
+    id: 'FrenziedBerserker',
+    name: 'Frenzied Berserker',
+    imageUrl: 'https://imgur.com/I7jv8Rg.png',
+    level: 'S',
+  },
+  GazeOfTruth: {
+    id: 'GazeOfTruth',
+    name: 'Gaze Of Truth',
+    imageUrl: 'https://imgur.com/cbOIDZu.png',
+    level: 'A',
+  },
+  HackCity: {
+    id: 'HackCity',
+    name: 'Hack City',
+    imageUrl: 'https://imgur.com/BcSWFmj.png',
+    level: 'A',
+  },
+  InfectiousLunacy: {
+    id: 'InfectiousLunacy',
+    name: 'Infectious Lunacy',
+    imageUrl: 'https://imgur.com/GlLIHM6.png',
+    level: 'S',
+  },
+  Invincible: {
+    id: 'Invincible',
+    name: 'Invincible',
+    imageUrl: 'https://imgur.com/GMR8yre.png',
+    level: 'S',
+  },
+  Screaming: {
+    id: 'Screaming',
+    name: 'Screaming',
+    imageUrl: 'https://imgur.com/W4jIv0Z.png',
+    level: 'B',
+  },
+  LanternHunger: {
+    id: 'LanternHunger',
+    name: 'LanternHunger',
+    imageUrl: 'https://imgur.com/Yem7uJv.png',
+    level: 'A',
+  },
+  Bite: {
+    id: 'Bite',
+    name: 'Bite',
+    imageUrl: 'https://imgur.com/8i0qcm8.png',
+    level: 'A',
+  },
+  Bite2: {
+    id: 'Bite2',
+    name: 'Bite',
+    imageUrl: 'https://imgur.com/8i0qcm8.png',
+    level: 'A',
+  },
+  Hack: {
+    id: 'Hack',
+    name: 'Hack',
+    imageUrl: 'https://imgur.com/Vi47wyq.png',
+    level: 'B',
+  },
+  Hack2: {
+    id: 'Hack2',
+    name: 'Hack',
+    imageUrl: 'https://imgur.com/Vi47wyq.png',
+    level: 'B',
+  },
+  Hew: {
+    id: 'Hew',
+    name: 'Hew',
+    imageUrl: 'https://imgur.com/mhry5B5.png',
+    level: 'B',
+  },
+  Hew2: {
+    id: 'Hew2',
+    name: 'Hew',
+    imageUrl: 'https://imgur.com/mhry5B5.png',
+    level: 'B',
+  },
+  Kick: {
+    id: 'Kick',
+    name: 'Kick',
+    imageUrl: 'https://imgur.com/bZLKWsR.png',
+    level: 'B',
+  },
+  Kick2: {
+    id: 'Kick2',
+    name: 'Kick',
+    imageUrl: 'https://imgur.com/bZLKWsR.png',
+    level: 'B',
+  },
+  WildCarve: {
+    id: 'WildCarve',
+    name: 'WildCarve',
+    imageUrl: 'https://imgur.com/eNH0pzK.png',
+    level: 'B',
+  },
+};
+
+export const butcherHitCardsMap = {
+  PigShoulder: {
+    id: 'PigShoulder',
+    name: 'Pig Shoulder',
+    imageUrl: 'https://imgur.com/gwE0LdA.png',
+  },
+  ButcherMask: {
+    id: 'ButcherMask',
+    name: 'Butcher Mask',
+    imageUrl: 'https://imgur.com/ywmMxHF.png',
+  },
+  Cleaver: {
+    id: 'Cleaver',
+    name: 'Cleaver',
+    imageUrl: 'hhttps://imgur.com/ok6lTMb.png',
+  },
+  Cleaver2: {
+    id: 'Cleaver2',
+    name: 'Cleaver',
+    imageUrl: 'hhttps://imgur.com/ok6lTMb.png',
+  },
+  FuriousBellow: {
+    id: 'FuriousBellow',
+    name: 'Furious Bellow',
+    imageUrl: 'https://imgur.com/a/6aNoY.png',
+  },
+  BreastPlate: {
+    id: 'BreastPlate',
+    name: 'BreastPlate',
+    imageUrl: 'https://imgur.com/h16LCrU.png',
+  },
+  Crown: {
+    id: 'Crown',
+    name: 'Crown',
+    imageUrl: 'https://imgur.com/ROdS8eU.png',
+  },
+  Gauntlet: {
+    id: 'Gauntlet',
+    name: 'Gauntlet',
+    imageUrl: 'https://imgur.com/43YxpGe.png',
+  },
+  Greaves: {
+    id: 'Greaves',
+    name: 'Greaves',
+    imageUrl: 'https://imgur.com/qFjoGLL.png',
+  },
+  Gut: {
+    id: 'Gut',
+    name: 'Gut',
+    imageUrl: 'https://imgur.com/PJB4rIV.png',
+  },
+  Scrag: {
+    id: 'Scrag',
+    name: 'Scrag',
+    imageUrl: 'https://imgur.com/TYhizDl.png',
+  },
+  Shoulder: {
+    id: 'Shoulder',
+    name: 'Shoulder',
+    imageUrl: 'https://imgur.com/EWc9IZM.png',
+  },
+  Vambraces: {
+    id: 'Vambraces',
+    name: 'Vambraces',
+    imageUrl: 'https://imgur.com/PTrSPpH.png',
+  },
+  Overpower: {
+    id: 'Overpower',
+    name: 'Overpower',
+    imageUrl: 'https://imgur.com/XtFG8D6.png',
+  },
+  ThickCape: {
+    id: 'ThickCape',
+    name: 'Thick Cape',
+    imageUrl: 'https://imgur.com/65EKeqR.png',
+  },
+};
